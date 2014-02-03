@@ -21,16 +21,16 @@
 
 session_start();
 
-# navegador
-$movil=0;
-if( !strcmp( get_navegador("tipo"), "movil") ) # si es navegador movil
-	$movil=1;
-else if( !strcmp($_GET["ver"], "movil") )		$movil=1;
-
 include( "config.php" );
 include( "base.php" );
 include( "functions.php" );
 include( "short_urls.php" );
 include( "sockets.php" );
+
+# navegador
+$movil=0;
+if( !strcmp( get_navegador("tipo"), "movil") ) # si es navegador movil
+	$movil=1;
+else if( !strcmp($_GET["ver"], "movil") )		$movil=1;
 
 ?>
