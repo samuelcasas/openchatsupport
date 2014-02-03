@@ -1,0 +1,40 @@
+create database ocs;
+use ocs;
+
+create table CHAT(
+	ID VARCHAR(10) not NULL, 				# id irrepetible
+	ID_CHAT VARCHAR(10) not NULL, 		# id del gestionador de chat
+	ID_SOPORTE VARCHAR(10) not NULL, 	# id del asesor de soporte
+	ID_CLIENTE VARCHAR(10) not NULL, 	# id del cliente (si esta logeado)
+	SESSION TEXT not NULL, 					# session, identificador de la ventana (conversacion)
+	MENSAJE TEXT not NULL, 					# mensaje chat
+	FECHA TEXT not NULL 						# fecha instantanea del suceso
+	);
+
+create table CHAT_GESTION(
+	ID VARCHAR(10) not NULL, 				# id irrepetible
+	ID_SOPORTE VARCHAR(10) not NULL, 	# id del asesor de soporte
+	ID_CLIENTE VARCHAR(10) not NULL, 	# id del cliente (si esta logeado)
+	SESSION TEXT not NULL, 					# session, identificador de la ventana (conversacion)
+	NAVEGADOR TEXT not NULL, 				# navegador del cliente
+	IP VARCHAR(100) not NULL, 				# ip del cliente
+	UBICACION VARCHAR(100) not NULL, 				# ip del cliente
+	NOMBRE VARCHAR(100) not NULL, 		# nombre del cliente (si esta logeado)
+	EMAIL VARCHAR(100) not NULL, 			# email cliente (si esta logeado)
+	TELEFONO VARCHAR(100) not NULL, 		# telefono cliente (si esta logeado)
+	FECHA TEXT not NULL, 					# fecha instantanea del suceso
+	FECHA_END TEXT not NULL, 				# fecha instantanea del suceso
+	SENDER VARCHAR(10) not NULL			# el ID de quien envia el mensaje
+	);
+
+create table CONTACTO(
+	ID VARCHAR(10) not NULL, 				# id irrepetible
+	ID_SOPORTE VARCHAR(10) not NULL, 	# id del asesor de soporte
+	NAVEGADOR TEXT not NULL, 				# navegador del cliente
+	IP VARCHAR(100) not NULL, 				# ip del cliente
+	NOMBRE VARCHAR(100) not NULL, 		# nombre del cliente (si esta logeado)
+	EMAIL VARCHAR(100) not NULL, 			# email cliente (si esta logeado)
+	MENSAJE TEXT not NULL, 					# mensaje chat
+	TELEFONO VARCHAR(100) not NULL, 		# telefono cliente (si esta logeado)
+	FECHA TEXT not NULL 						# fecha instantanea del suceso
+	);

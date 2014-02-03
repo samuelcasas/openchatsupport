@@ -1,0 +1,29 @@
+### OpenChatSupport v1.0
+
+# About creator
+
+M.S.I. Angel Cantu Jauregui <angel.cantu@sie-group.net>
+Web http://www.sie-group.net/
+Date	Feb 02 2014, 20:00
+
+# About software
+
+OpenChatSupport is a solution to implement a free tool in Support 
+Service our clients. Easy and fast to install in our projects.
+
+Have fun !
+
+# last changes
+
+>> Feb 02 2014	- Release 1.0 (Beta)
+
+* Starting the project.
+* Compressing and uploading the project to our github: https://github.com/siegroup
+* Making the repository for project: https://github.com/siegroup/openchatsupport/
+* Release v1.0 Beta.
+* About documentation ?... later !...
+* What Need to know to make my apportation ?: see all files, special: chat_*.php and modulos.php
+* Website and social profiles ?... later !...
+* Why structured PHP and not POO ??... because I want :D... but I accept changes ;)
+* If you want, send me your 'patch' (changes and news).
+* Waiting for community response xD
