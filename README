@@ -13,17 +13,11 @@ Service our clients. Easy and fast to install in our projects.
 
 Have fun !
 
-# last changes
+# author - contributor
 
->> Feb 02 2014	- Release 1.0 (Beta)
+Angel Cantu Jauregui			@diabliyo
+Juan Villa						@villaju
 
-* Starting the project.
-* Compressing and uploading the project to our github: https://github.com/siegroup
-* Making the repository for project: https://github.com/siegroup/openchatsupport/
-* Release v1.0 Beta.
-* About documentation ?... later !...
-* What Need to know to make my apportation ?: see all files, special: chat_*.php and modulos.php
-* Website and social profiles ?... later !...
-* Why structured PHP and not POO ??... because I want :D... but I accept changes ;)
-* If you want, send me your 'patch' (changes and news).
-* Waiting for community response xD
+# project
+
+https://github.com/siegroup/openchatsupport

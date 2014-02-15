@@ -18,8 +18,9 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define( BASE_USR, "my_username_db" );
-define( BASE_PASS, "my_password_db" );
-define( SERVER, "my_hostname_db" );
-define( BASE, "my_dbname" );
+define( BASE_USR, "" );
+define( BASE_PASS, "" );
+define( SERVER, "" );
+define( BASE, "" );
+define( VERSION, file_get_contents("VERSION") );
 ?>

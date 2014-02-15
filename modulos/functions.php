@@ -709,116 +709,6 @@ function limpiar( $con )
 	mysql_free_result($con);
 	}
 	
-function msg2msgtags( $mensaje )
-	{
-	/*
-	strchr( lugar, palabraclave )  busca la "palabraclave" en "lugar"
-	str_replace( palabraclave, sustituto, lugar )  busca en "lugar" la "palabraclave" y la sustituye por "sustituto"
-	*/
-   $cad_buscar= array(
-   				'/\[googlemaps\](.*?)\[\/googlemaps\]/is',
-   				'/\[googlemaps size=(.*?)\](.*?)\[\/googlemaps\]/is',
-   				'/\[googlemaps\=latlong size=(.*?)\](.*?)\[\/googlemaps\]/is',
-   				'/\[googlemaps\=latlong\](.*?)\[\/googlemaps\]/is', 
-   				'/\[hr\]/is', 
-   				'/\[amp\]/is',
-   				'/\[h1\](.*?)\[\/h1\]/is',
-   				'/\[h2\](.*?)\[\/h2\]/is', 
-   				'/\[capa\=(.*?)\](.*?)\[\/capa\]/is',
-   				'/\[span\=(.*?)\](.*?)\[\/span\]/is',
-   				'/\[center\](.*?)\[\/center\]/is',
-   				'/\[table\](.*?)\[\/table\]/is',
-   				'/\[th\](.*?)\[\/th\]/is',
-   				'/\[td\](.*?)\[\/td\]/is',
-   				'/\[tr\]/is',
-   				'/\[list\](.*?)\[\/list\]/is',
-   				'/\[li\](.*?)\[\/li\]/is',
-   				'/\[b\](.*?)\[\/b\]/is',
-   				'/\[i\](.*?)\[\/i\]/is',
-   				'/\[u\](.*?)\[\/u\]/is',
-   				'/\[s\](.*?)\[\/s\]/is',
-   				'/\[url\=(.*?)\](.*?)\[\/url\]/is',                         
-   				'/\[url\](.*?)\[\/url\]/is',                             
-   				'/\[align\=(left|center|right|justify)\](.*?)\[\/align\=(left|center|right|justify)\]/is',
-   				'/\[img\](.*?)\[\/img\]/is',                            
-   				'/\[font\=(.*?)\](.*?)\[\/font\]/is',                    
-   				'/\[size\=(.*?)\](.*?)\[\/size\]/is',                    
-   				'/\[color\=(.*?)\](.*?)\[\/color\]/is',
-   				'/\[code\=php\](.*?)\[\/code\]/is', 
-   				'/\[code\](.*?)\[\/code\]/is',
-   				'/\[quote\](.*?)\[\/quote\]/is',
-   				'/\[youtube\](.*?)\[\/youtube\]/is',
-   				'/\[youtube width\=(.*?) height\=(.*?)\](.*?)\[\/youtube\]/is',
-   				'/\[swf\](.*?)\[\/swf\]/is',
-   				'/\[swf (.*?) (.*?)\](.*?)\[\/swf\]/is',
-   				'/\[tab\]/is', 
-   				'/\[play_mp3\](.*?)\[\/play_mp3\]/is', 
-   				'/\[video (.*?) (.*?)\](.*?)\[\/video\]/is',
-   				'/\[video\](.*?)\[\/video\]/is', 
-   				'/\[video_flash\](.*?)\[\/video_flash\]/is', 
-   				'/\[video_flash (.*?) (.*?)\](.*?)\[\/video_flash\]/is', 
-   				'/\[precio\](.*?)\[\/precio\]/is'
-   				);
-
-	$cad_remplazo= array(
-					'<iframe src="'. HTTP_SERVER. '/googlemaps.php?place=$1"></iframe>',
-					'<iframe src="'. HTTP_SERVER. '/googlemaps.php?place=$2&size=$1"></iframe>',
-					'<iframe src="'. HTTP_SERVER. '/googlemaps.php?data=$2&size=$1"></iframe>',
-					'<iframe src="'. HTTP_SERVER. '/googlemaps.php?data=$1"></iframe>', 
-					'<hr>', 
-					'&',
-					'<h1>$1</h1>',
-					'<h2>$1</h2>', 
-					'<div id="$1">$2</div>', 
-					'<div style="$1">$2</div>',
-					'<center>$1</center>',
-					'<table id="bbcode_tabla">$1</table>',
-					'<th>$1</th>',
-					'<td>$1</td>',
-					'<tr>',
-					'<ul>$1</ul>',
-					'<li>$1</li>',
-   				'<strong>$1</strong>',
-   				'<em>$1</em>',
-   				'<u>$1</u>',
-   				'<strike>$1</strike>',
-   				'<a href="$1">$2</a>',
-   				'<a href="$1">$1</a>',
-   				'<div style="text-align:$1;">$2</div>',
-   				'<img src="$1" border="0" />',
-   				'<span style="font-family:$1;">$2</span>',
-   				'<span style="font-size:$1;">$2</span>',
-   				'<span style="color: $1;">$2</span>',
-   				'Codigo PHP<br><div id="etiqueta_code">'. highlight_string('$1', 'true'). '</div>',
-   				'Codigo:<br><div id="etiqueta_code">$1</div>',
-   				'Cita:<br><div id="etiqueta_code">$1</div>',
-   				'<span style="display:block;"><object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/$1"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/$1" type="application/x-shockwave-flash" wmode="transparent" width="425" height="344"></embed></object></span>',
-   				'<span style="display:block;"><object width="$1" height="$2"><param name="movie" value="http://www.youtube.com/v/$3"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/$3" type="application/x-shockwave-flash" wmode="transparent" width="$1" height="$2"></embed></object></span>',
-					'<span style="display:block;"><embed src="$1" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" wmode="transparent"></embed></span>',
-					'<span style="display:block;"><embed src="$3" $1 $2 type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" wmode="transparent"></embed></span>',
-					proteger_cadena('&#160;&#160;&#160;&#160;'), 
-					'<object type="application/x-shockwave-flash" data="admin/addons/dewplayer-mini.swf" width="160" height="20">
-					<param name="wmode" value="transparent" />
-					<param name="movie" value="admin/addons/dewplayer-mini.swf" />
-					<param name="flashvars" value="mp3=uploads/noticias/'. mp3_file('$1'). '" />
-					</object>', 
-					'<video src="$3" $1 $2 controls onerror="stream_video_error(event)" type="video/ogg">Su Navegador no soporta reproduccion de video HTML5</video>', 
-					'<video src="$1" controls onerror="stream_video_error(event)" type="video/ogg">Su Navegador no soporta reproduccion de video HTML5</video>',
-					'<embed type="application/x-shockwave-flash" src="admin/addons/player.swf" style="" id="mpl" name="mpl" quality="high" allowfullscreen="true" allowscriptaccess="always" 
-					flashvars="file=$1">',
-					'<embed type="application/x-shockwave-flash" src="admin/addons/player.swf" style="" id="mpl" name="mpl" quality="high" allowfullscreen="true" allowscriptaccess="always" 
-					flashvars="file=$3" height="$2" width="$1">', 
-					'<div class="precio">$1</div>'
-                );
-                #http://www.podtrac.com/pts/redirect.mp3/
-
-	$mensaje= htmlentities($mensaje, ENT_QUOTES);
-	$mensaje= preg_replace( $cad_buscar, $cad_remplazo, $mensaje );
-	$mensaje= html_entity_decode($mensaje, ENT_QUOTES);
-
-	return $mensaje;
-	}
-	
 function proteger_cadena( $cadena )
 	{
 	return htmlentities($cadena, ENT_QUOTES);
@@ -845,9 +735,6 @@ function desproteger_cadena( $cadena )
 		$out= str_replace( "\t", "&nbsp;&nbsp;&nbsp;", $out );
 	
 	$out= utf8_encode( str_replace("|","/",$out) );
-	$out= msg2msgtags($out);
-	$out= msg2caritas($out);
-	$out= msg2caritas_extra($out);
 	
 	return $out;
 	}

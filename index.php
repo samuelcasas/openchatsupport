@@ -38,21 +38,38 @@ header( 'Vary: Accept-Encoding' );
 unset($offset);
 
 # loading modules (other php functions)
-include( "modulos/modulos.php" );
+if( BASE_USR && BASE_PASS && SERVER && BASE )
+	include( "modulos/modulos.php" );
 
 echo '
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/DTD/strict.dtd">
 <html>
 	<head>
 		<title>OpenChat Support - Test Index</title>
+		<script language="JavaScript" type="text/javascript" src="js/script.js"></script>
+		<script language="JavaScript" type="text/javascript" src="js/jquery.js"></script>
+		<link href="css/estilo.css" type="text/css" rel="stylesheet">
 	</head>
 	
 	<body>';
 
-# init chat support
-# look the function to know how made more chat windows
-chat_init();
+if( !BASE_USR || !BASE_PASS || !SERVER || !BASE )
+	echo "Please try to install ". VERSION. " please made this:
+	<ul>
+		<li>mysql -u your_username -h your_hostname dababasename -p < mysql.db</li>
+		<li>Edit file <b>config.php</b> and set the vars.</li>
+	</ul>";
+else
+	{
+	echo 'Good ;)... '. VERSION. ' is installed.<br>Now you can test the software...
+	<p>Remember !<br>If you implement '. VERSION. ' in your CMS or Platform, please tell us, to help you in made a plugin !</p>
+	<p>Contact me:<br>
+	Angel Cantu <<a href="mailto:angel.cantu@sie-group.net">angel.cantu@sie-group.net</a>></p>';
 
+	# init chat support
+	# look the function to know how made more chat windows
+	chat_init();
+	}
 
 echo '</body>
 </html>

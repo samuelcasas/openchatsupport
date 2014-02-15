@@ -1,40 +1,57 @@
-create database ocs;
-use ocs;
-
 create table CHAT(
-	ID VARCHAR(10) not NULL, 				# id irrepetible
-	ID_CHAT VARCHAR(10) not NULL, 		# id del gestionador de chat
-	ID_SOPORTE VARCHAR(10) not NULL, 	# id del asesor de soporte
-	ID_CLIENTE VARCHAR(10) not NULL, 	# id del cliente (si esta logeado)
-	SESSION TEXT not NULL, 					# session, identificador de la ventana (conversacion)
-	MENSAJE TEXT not NULL, 					# mensaje chat
-	FECHA TEXT not NULL 						# fecha instantanea del suceso
+	ID VARCHAR(10) not NULL UNIQUE PRIMARY KEY,
+	ID_CHAT VARCHAR(10) not NULL,
+	ID_SOPORTE VARCHAR(10) not NULL,
+	ID_CLIENTE VARCHAR(10) not NULL,
+	SESSION TEXT not NULL,
+	MENSAJE TEXT not NULL,
+	FECHA TEXT not NULL
 	);
 
 create table CHAT_GESTION(
-	ID VARCHAR(10) not NULL, 				# id irrepetible
-	ID_SOPORTE VARCHAR(10) not NULL, 	# id del asesor de soporte
-	ID_CLIENTE VARCHAR(10) not NULL, 	# id del cliente (si esta logeado)
-	SESSION TEXT not NULL, 					# session, identificador de la ventana (conversacion)
-	NAVEGADOR TEXT not NULL, 				# navegador del cliente
-	IP VARCHAR(100) not NULL, 				# ip del cliente
-	UBICACION VARCHAR(100) not NULL, 				# ip del cliente
-	NOMBRE VARCHAR(100) not NULL, 		# nombre del cliente (si esta logeado)
-	EMAIL VARCHAR(100) not NULL, 			# email cliente (si esta logeado)
-	TELEFONO VARCHAR(100) not NULL, 		# telefono cliente (si esta logeado)
-	FECHA TEXT not NULL, 					# fecha instantanea del suceso
-	FECHA_END TEXT not NULL, 				# fecha instantanea del suceso
-	SENDER VARCHAR(10) not NULL			# el ID de quien envia el mensaje
+	ID VARCHAR(10) not NULL UNIQUE PRIMARY KEY,
+	ID_SOPORTE VARCHAR(10) not NULL,
+	ID_CLIENTE VARCHAR(10) not NULL,
+	SESSION TEXT not NULL,
+	NAVEGADOR TEXT not NULL,
+	IP VARCHAR(100) not NULL,
+	UBICACION VARCHAR(100) not NULL,
+	NOMBRE VARCHAR(100) not NULL,
+	EMAIL VARCHAR(100) not NULL,
+	TELEFONO VARCHAR(100) not NULL,
+	FECHA TEXT not NULL,
+	FECHA_END TEXT not NULL,
+	SENDER VARCHAR(10) not NULL
 	);
 
 create table CONTACTO(
-	ID VARCHAR(10) not NULL, 				# id irrepetible
-	ID_SOPORTE VARCHAR(10) not NULL, 	# id del asesor de soporte
-	NAVEGADOR TEXT not NULL, 				# navegador del cliente
-	IP VARCHAR(100) not NULL, 				# ip del cliente
-	NOMBRE VARCHAR(100) not NULL, 		# nombre del cliente (si esta logeado)
-	EMAIL VARCHAR(100) not NULL, 			# email cliente (si esta logeado)
-	MENSAJE TEXT not NULL, 					# mensaje chat
-	TELEFONO VARCHAR(100) not NULL, 		# telefono cliente (si esta logeado)
-	FECHA TEXT not NULL 						# fecha instantanea del suceso
+	ID VARCHAR(10) not NULL UNIQUE PRIMARY KEY,
+	ID_SOPORTE VARCHAR(10) not NULL,
+	NAVEGADOR TEXT not NULL,
+	IP VARCHAR(100) not NULL,
+	NOMBRE VARCHAR(100) not NULL,
+	EMAIL VARCHAR(100) not NULL,
+	MENSAJE TEXT not NULL,
+	TELEFONO VARCHAR(100) not NULL,
+	FECHA TEXT not NULL
 	);
+
+/* IMPORTANT: The database 'USUARIOS'  is the "name" of your database where you have your users (clients, wherever...). */
+
+create table USUARIOS (
+			ID VARCHAR(10) UNIQUE PRIMARY KEY, 
+			NOMBRE VARCHAR(100),
+			NICK VARCHAR(100), 
+			PASSWORD TEXT, 
+			EMAIL TEXT not NULL, 
+			TIPO_USR VARCHAR(30), 
+			FECHA_REGISTRO TEXT not NULL,  
+			AVATAR VARCHAR(100) not NULL,  
+			FECHA_NACIMIENTO TEXT not NULL,  
+			ONLINE VARCHAR(1) not NULL 
+);
+
+/* 1=> admin, 2=>autor, 3=>editor, 4=>coadmin, 5=>soporte, 6=>usuario */
+insert into USUARIOS( ID, NICK, PASSWORD, EMAIL, TIPO_USR ) values( '4dm1n', 'root', 'free123', 'mail@gmail.com', '1');
+insert into USUARIOS( ID, NICK, PASSWORD, EMAIL, TIPO_USR ) values( '0th3r', 'soporte', 'free123', 'soporte@gmail.com', '5');
+insert into USUARIOS( ID, NICK, PASSWORD, EMAIL, TIPO_USR ) values( 'u53r', 'anon', 'free123', 'anon@gmail.com', '6');

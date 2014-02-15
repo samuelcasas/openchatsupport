@@ -1,3 +1,25 @@
->> v1.0-020314
+>> Feb 15 2014 - Release 1.1-150214 (Stable)
+* Fixed problems to "install" the project in your localhost.
+* Tagged by "stable" because the project right now can be tested by any coder.
+* VERSION file is created.
+* README file is modified to have information from autor, contributor and URLs.
+* ajax.php is created to ajax+jquery response.
+* css/estilo.css es created to set "font" and "body".
+* images has been put in "imagenes" folder.
+* sprite.xcf (source GIMP) has been put in "imagenes" folder.
+* javascript files has been put in "js" folder.
+* index.php right now detect if the define variables exist.
 
+>> Feb 02 2014	- Release 1.0 (Beta)
+
+* Starting the project.
+* Compressing and uploading the project to our github: https://github.com/siegroup
+* Making the repository for project: https://github.com/siegroup/openchatsupport/
+* Release v1.0 Beta.
+* About documentation ?... later !...
+* What Need to know to make my apportation ?: see all files, special: chat_*.php and modulos.php
+* Website and social profiles ?... later !...
+* Why structured PHP and not POO ??... because I want :D... but I accept changes ;)
 * erikcatala and EFEX from foro.elhacker.net report a fail in modulos.php, fixed done ;)
+* If you want, send me your 'patch' (changes and news).
+* Waiting for community response xD

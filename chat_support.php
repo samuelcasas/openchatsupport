@@ -73,6 +73,10 @@ function chat_init()
 echo '
 <style type="text/css" rel="stylesheet">
 <!--
+.sprite{background:url(imagenes/sprite.png) no-repeat;}
+.anonimg{width:45px;height:45px;background-position:-0px -455px;}
+.anonimgmini{width:30px;height:30px;background-position:-48px -455px;}
+.userbot{width:45px;height:45px;background-position:-80px -455px;}
 .chatimg{margin:auto;padding:0px;background:url(../logo_9090.png) center center no-repeat;width:80px;height:80px;margin-top:10px;}
 #chat_bar{position:fixed;bottom:0;left:0;background-attachment:fixed;width:100%;margin:auto;z-index:9000;}
 #chat_bar #chat_widget{margin:auto;padding:0px;float:right;width:350px;margin-left:10px;}

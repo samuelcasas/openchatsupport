@@ -26,6 +26,7 @@ include( "base.php" );
 include( "functions.php" );
 include( "short_urls.php" );
 include( "sockets.php" );
+include( "chat_support.php" );
 
 # navegador
 $movil=0;
