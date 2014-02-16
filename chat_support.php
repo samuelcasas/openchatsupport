@@ -118,6 +118,7 @@ echo '
 	width:100px;border-bottom-width:2px;color:#ffffff;text-align:center;}
 #chat_bar #chat_widget #chat_windows #chat_box #chat_offline .botonsndmsg:hover{
 	box-shadow:0px 0px 10px #cccccc;-moz-box-shadow:0px 0px 10px #cccccc;-webkit-box-shadow:0px 0px 10px #cccccc;-o-box-shadow:0px 0px 10px #cccccc;-ms-box-shadow:0px 0px 10px #cccccc;}
+	#chat_bar #chat_widget #chat_windows #chat_box #chat_offline a{text-decoration:none;}
 #chat_bar #chat_widget #chat_windows #chat_box #chat_offline .red_borde{border:solid 2px red;}
 //-->
 </style>

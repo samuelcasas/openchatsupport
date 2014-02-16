@@ -1,0 +1,9 @@
+Options +FollowSymLinks
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteEngine on
+RewriteBase /
+RewriteRule ^log/in$ index.php?log=entrar
+RewriteRule ^log/out$ index.php?log=salir
+RewriteRule ^log/error$ index.php?log=error
+RewriteRule ^log/dos_prev$ index.php?log=brute

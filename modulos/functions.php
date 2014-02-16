@@ -36,10 +36,12 @@ function get_geolocation()
 # forza utilizar www 
 function httpwwwforce()
 	{
-	 # si no contiene www, redirigimos
-	 if( !urlparser($_SERVER['HTTP_HOST'], array("www", "0")) )
-	 	{
-	 	$parsehttp='';
+	if( !WWWFORCE )	return;
+
+	# si no contiene www, redirigimos
+	if( !urlparser($_SERVER['HTTP_HOST'], array("www", "0")) )
+		{
+		$parsehttp='';
 
 		if( !strcmp($_SERVER['HTTPS'], "on") )
 			$parsehttp= 'https://';

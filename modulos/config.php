@@ -18,9 +18,25 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define( BASE_USR, "" );
-define( BASE_PASS, "" );
-define( SERVER, "" );
-define( BASE, "" );
+define( BASE_USR, "" );		# change this
+define( BASE_PASS, "" );	# change this
+define( SERVER, "" );		# change this
+define( BASE, "" );			# change this
 define( VERSION, file_get_contents("VERSION") );
+define( HAPPY_URL, 1 ); # 1=enable, 0=disable
+define( WWWFORCE, 0 ); # force WWW on URL (don't use on subdomain)
+
+# scheme
+if( !strcmp($_SERVER['HTTPS'], "on") )
+	$parsehttp= 'https://';
+else		$parsehttp= 'http://';
+
+if( !strstr($_SERVER['HTTP_HOST'], "www.") && WWWFORCE ) # si no tiene www y esta activado el force www
+	$parsehttp .= 'www.'; # ponemos www
+
+if( !HAPPY_URL )
+	define( HTTP_SERVER, "" );
+else
+	define( HTTP_SERVER, $parsehttp. $_SERVER['HTTP_HOST']. "/" );
+
 ?>
