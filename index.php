@@ -57,11 +57,16 @@ echo '
 	<body>';
 
 if( !BASE_USR || !BASE_PASS || !SERVER || !BASE )
-	echo "Please try to install ". VERSION. " please made this:
-	<ul>
-		<li>mysql -u your_username -h your_hostname dababasename -p < mysql.db</li>
-		<li>Edit file <b>config.php</b> and set the vars.</li>
-	</ul>";
+	{
+	echo '
+	<div id="main">
+		To install '. VERSION. ' please made this:
+		<ul>
+			<li>mysql -u your_username -h your_hostname dababasename -p < mysql.db</li>
+			<li>Edit file <b>config.php</b> and set the vars.</li>
+		</ul>
+	</div>';
+	}
 else
 	{
 	echo '
