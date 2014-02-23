@@ -1,3 +1,7 @@
+>> Feb 23 2014 - Release 1.1-230214
+* Added "BRUTE" database to detect bruteforcing intents.
+* Fixed bug when try to login, set correct variable name (log_usr and log_pass).
+
 >> Feb 15 2014 - Release 1.1-150214 (Stable)
 * Fixed problems to "install" the project in your localhost.
 * Tagged by "stable" because the project right now can be tested by any coder.

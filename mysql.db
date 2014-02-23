@@ -36,6 +36,13 @@ create table CONTACTO(
 	FECHA TEXT not NULL
 	);
 
+create table BRUTE(
+	ID VARCHAR(10) not NULL UNIQUE PRIMARY KEY, 
+	IP VARCHAR(20) not NULL, 
+	IP_PROXY VARCHAR(20) not NULL, 
+	FECHA VARCHAR(100) not NULL
+	);
+
 /* IMPORTANT: The database 'USUARIOS'  is the "name" of your database where you have your users (clients, wherever...). */
 
 create table USUARIOS (

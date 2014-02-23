@@ -42,6 +42,7 @@ if( BASE_USR && BASE_PASS && SERVER && BASE )
 	{
 	include( "modulos/modulos.php" );
 	httpwwwforce();
+	autenticacion( $_GET["log"] ); # valida autenticacion
 	}
 
 echo '
@@ -87,16 +88,16 @@ else
 			{
 			$mod= array( "1"=>"admin", "2"=>"autor", "3"=>"editor", "4"=>"coadmin", "5"=>"support", "6"=>"usuario" );
 			echo 'Welcome <b>'. desproteger_cadena($_SESSION["log_usr"]). '</b><br>
-			Account type: <b>'. $mod[consultar_datos_general("USUARIOS", "ID='". proteger_cadena($_SESSION["log_id"]). "'", "TIPO_USR")]. '</b>
-			<a href="'. url_amigable("?id=logout", "log", "login", "out"). '">Logout</a>';
+			Account type: <b>'. $mod[consultar_datos_general("USUARIOS", "ID='". proteger_cadena($_SESSION["log_id"]). "'", "TIPO_USR")]. '</b> 
+			[<a href="'. url_amigable("?id=logout", "log", "login", "out"). '">Logout</a>]';
 			}
 		else
 			{
 			echo '
 			<form action="'. url_amigable( "?log=entrar", "log", "login", "in"). '" method="POST" name="form">
 				<ul>
-					<li>User: <input type="text" value="" id="user" name="user"></li>
-					<li>Pass: <input type="password" value="" id="pass" name="pass"></li>
+					<li>User: <input type="text" value="" id="log_usr" name="log_usr"></li>
+					<li>Pass: <input type="password" value="" id="log_pass" name="log_pass"></li>
 					<li><input type="submit" value="Login"></li>
 				</ul>
 			</form>';
