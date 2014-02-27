@@ -18,10 +18,10 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define( BASE_USR, "" );		# change this
-define( BASE_PASS, "" );	# change this
-define( SERVER, "" );		# change this
-define( BASE, "" );			# change this
+define( BASE_USR, "diabliyo" );		# change this
+define( BASE_PASS, "A1s4r1l2n" );	# change this
+define( SERVER, "localhost" );		# change this
+define( BASE, "openchat" );			# change this
 define( VERSION, file_get_contents("VERSION") );
 define( HAPPY_URL, 1 ); # 1=enable, 0=disable
 define( WWWFORCE, 0 ); # force WWW on URL (don't use on subdomain)
