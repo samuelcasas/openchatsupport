@@ -1,6 +1,16 @@
+>> Mar ?? 2014 - Release 1.2-020214
+* Special Thanks for: Samuel Casa for noticing the stupidity I made up my keys in github.
+* Changes to mysql.db.
+* DB CHAT and DB CHAT_GESTION will be modified, look the cell "SENDER".
+* Bug Fix: the system can't know who's the client for support  conversation, so... support never can't recover the messages.
+* Added more explanation on code comments.
+
 >> Feb 23 2014 - Release 1.1-230214
 * Added "BRUTE" database to detect bruteforcing intents.
-* Fixed bug when try to login, set correct variable name (log_usr and log_pass).
+* Fixed bug: when try to login, set correct variable name (log_usr and log_pass).
+* Fixed bug: the systema can't identified the conversation window, now an ID (variable chatwin) is loaded from support windows side.
+* GeoIP librari added.
+* Bug Active From Support Side: the system search and found news clients, but cant stop :(, the systema open new windows every time :S...
 
 >> NO VERSION INFO
 * typical, upload my rsa keys: S

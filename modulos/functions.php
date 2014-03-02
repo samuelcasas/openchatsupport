@@ -23,9 +23,9 @@ function get_geolocation()
 	{
 	//Geo Localizacion por IP
 	# require( "admin/geoip.inc" ); //incluimos cabecera
-	require( "admin/geoipcity.inc" ); //incluimos cabecera
-	include( "admin/geoipregionvars.php" );
-	$geoip_bd= geoip_open( "admin/geoip/GeoIPLiteCity.dat", GEOIP_STANDARD ); //abrimos archivos dat
+	require( "modulos/geoipcity.inc" ); //incluimos cabecera
+	include( "modulos/geoipregionvars.php" );
+	$geoip_bd= geoip_open( "modulos/geoip/GeoIPLiteCity.dat", GEOIP_STANDARD ); //abrimos archivos dat
 	$ip= $_SERVER['REMOTE_ADDR']; //obtenemos IP
 	$r= geoip_record_by_addr( $geoip_bd, $ip );
 	$ubicacion= proteger_cadena(($r->city. '/'. $GEOIP_REGION_NAME[$r->country_code][$r->region]. '/'. $r->country_name));

@@ -50,7 +50,7 @@ function detectar_entradas(c,e,op,ref)
 		else if( op=='chat_addmsg')
 			{
 			capa.focus();
-			cargar_datos('my=chatsupport&op=addmsg#end','chat_messages','POST','chat_msg', '1', '1');
+			cargar_datos('my=chatsupport&op=addmsg#end','chat_messages','POST','chat_msg:chatwin', '1', '1');
 			capa.value='';
 			}
 		}

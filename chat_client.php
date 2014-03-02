@@ -31,13 +31,13 @@ Have fun !
 
 if( !strcmp($_GET["my"], "chatsupport") )
 	{
-	if( !strcmp($_GET["op"], "searchclient") ) # busca clienteen espera de soporte
+	if( !strcmp($_GET["op"], "searchclient") ) # busca clientes en espera de soporte
 		{
 		$cons= consultar_enorden_con( "CHAT_GESTION", "ID_SOPORTE='". $_SESSION["log_id"]. "' && FECHA_END='0'", "FECHA ASC");
 		if( mysql_num_rows($cons) )		# si hay ventanas
 			{
 			while( $buf=mysql_fetch_array($cons) )
-				chat_new_window();
+				chat_new_window($buf["ID"]);
 			}
 		unset($cons);
 		}
@@ -139,18 +139,15 @@ if( !strcmp($_GET["my"], "chatsupport") )
 				$email= consultar_datos_general( "USUARIOS", "ID='". proteger_cadena($_SESSION["log_id"]). "'", "EMAIL");
 				$telefono='0';
 				$idcliente= $_SESSION["log_id"];
+				$sender= $_SESSION["log_id"];   # id del que envia
 				}
-			else
+			else # es anonimo
 				{
 				$nombre= '0';
 				$email= '0';
 				$telefono='0';
 				$idcliente= '0';
-				}
-					
-			if( !is_login() )  # si no esta logeado es visitante
-				$sender=0;
-			else		$sender= $_SESSION["log_id"];   # id del que envia
+				}		
 				
 			$trama=array(
 				"id"=>"'". $idtrack. "'", 
@@ -165,7 +162,6 @@ if( !strcmp($_GET["my"], "chatsupport") )
 				# "telefono"=>"", 
 				"fecha"=>"'". time(). "'", 
 				"fecha_end"=>"'0'", 
-				"sender"=>"'". $sender. "'"  # el que envia
 				);
 			insertar_bdd( "CHAT_GESTION", $trama); # insertamos
 			unset($idtrack, $trama, $nombre, $email, $telefono, $idcliente);
@@ -176,21 +172,39 @@ if( !strcmp($_GET["my"], "chatsupport") )
 			$idtrack= generar_idtrack(); //obtenemos digito aleatorio
 			}while( !strcmp( $idtrack, consultar_datos_general( "CHAT", "ID='". $idtrack. "'", "ID" ) ) );
 			
-		if( is_login() )		$idcliente= $_SESSION["log_id"];
-		else		$idcliente= '0';
+		# verificaremos quien envia el mensaje y datos de cliente-soporte
+		#
+		# si es soporte, entonces ponemos el ID del cliente con el que hablamos
+		if( is_soporte() )
+			{
+			$idsender= $_SESSION["log_id"];
+			$idcliente= consultar_datos_general( "CHAT_GESTION", "ID='". proteger_cadena($_POST["chatwin"]). "'", "ID_CLIENTE"); # obtenemos id del cliente, del ID chat
+			}
+		else if( is_login() ) # es un cliente logeado
+			{
+			$idsender= $_SESSION["log_id"];
+			$idcliente= $idsender;
+			}
+		else		# es anonimo
+			{
+			$idsender= '0';
+			$idcliente= '0';
+			}
+			
 		# inserta mensaje en la bdd
 		$tr_msg=array(
-			"id"=>"'". $idtrack. "'",
+			"id"=>"'". $idtrack. "'", # id nuevo por cada mensaje intercambiado
 			"id_chat"=>"'". consultar_datos_general("CHAT_GESTION", "SESSION='". proteger_cadena($_COOKIE["PHPSESSID"]). "' && FECHA_END='0'", "ID"). "'",  # la id del gestionador
-			"id_soporte"=>"'". consultar_datos_general("CHAT_GESTION", "SESSION='". proteger_cadena($_COOKIE["PHPSESSID"]). "' && FECHA_END='0'", "ID_SOPORTE"). "'",  
-			"id_cliente"=>"'". $idcliente. "'", 
-			"session"=>"'". proteger_cadena($_COOKIE["PHPSESSID"]). "'", 
-			"mensaje"=>"'". proteger_cadena($_POST["chat_msg"]). "'", 
-			"fecha"=>"'". time(). "'"
+			"id_soporte"=>"'". consultar_datos_general("CHAT_GESTION", "SESSION='". proteger_cadena($_COOKIE["PHPSESSID"]). "' && FECHA_END='0'", "ID_SOPORTE"). "'",  # el asesor
+			"id_cliente"=>"'". $idcliente. "'", # el cliente con el que se conversa
+			"session"=>"'". proteger_cadena($_COOKIE["PHPSESSID"]). "'", # nuestra sesion 
+			"mensaje"=>"'". proteger_cadena($_POST["chat_msg"]). "'", # el mensaje
+			"fecha"=>"'". time(). "'", # tiempo
+			"sender"=>"'". $idsender. "'"  # el que envia el mensaje, 0 => cliente
 			);
 		insertar_bdd( "CHAT", $tr_msg ); # insertamos
 
-		# colocamos el mensaje
+		# colocamos el mensaje (mostramos)
 		echo '<div id="chat_box">
 			<div class="pic">
 				<div class="sprite anonimg"></div>

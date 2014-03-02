@@ -129,7 +129,7 @@ echo '
 	global $idwindows;
 	
 	if( !is_soporte() )
-		chat_new_window();
+		chat_new_window(0);
 	echo '</div>
 
 <script type="text/javascript">
@@ -151,11 +151,13 @@ foreach( $idwindows as $key=>$val )
 			});';
 		}
 
-if( is_soporte() )		# buscador de ventanas para soporte
+#
+# buscador de ventanas para soporte
+if( is_soporte() )		
 	{
 	echo '
 	setInterval( function()	{
-			cargar_datos(\'my=chatsupport&op=searchclient\',\'chat_bar\',\'GET\',\'chat_msg\', \'1\', \'1\');
+			cargar_datos(\'my=chatsupport&op=searchclient\',\'chat_bar\',\'GET\',\'0\', \'1\', \'1\');
 		}, 1000);';
 	}
 
@@ -168,7 +170,7 @@ echo '});
 
 
 # make new chat window
-function chat_new_window()
+function chat_new_window( $a )
 	{
 	global $idwindows;		# contador de ventanas creadas
 	$id= generar_idtrack();
@@ -188,12 +190,14 @@ function chat_new_window()
 					<div class="tabin_'. $id. '" style="display:none;">
 					<div class="content" id="chat_messages">
 							<div id="chat_box"">';
+							
+						# hay persona del soporte ?
 						if( get_support( "ison" ) )
 							{
 							# si no se le ha asignado un asesor a la session actual
 							if( !$_SESSION["chat_asesorid"] )
 								{
-								# buscamos si estuvo antes aqui
+								# buscamos si estuvo antes aqui, y que su conversacion no haya sido finalizada
 								$cons= consultar_enorden_con( "CHAT", "ID_CHAT='". consultar_datos_general("CHAT_GESTION", "SESSION='". proteger_cadena($_COOKIE["PHPSESSID"]). "' && FECHA_END='0'", "ID"). "'", "FECHA DESC");
 								if( mysql_num_rows($cons) ) # si estuvo aqui
 									{
@@ -225,11 +229,11 @@ function chat_new_window()
 									echo '</div>
 									<div class="txt"><b>'. desproteger_cadena($nick). '</b>: Tienes alguna duda ?, estar'. acento("e"). ' aqui para apoyarte en cualquier cosa !.</div>';
 									}
-								else 		# recperando los mensajes
+								else 		# recuperando los mensajes
 									{
 									while( $buf=mysql_fetch_array($cons) )
 										{
-										if( $buf["SENDER"] ) # si hay Id del que envia
+										if( $buf["SENDER"] ) # si hay ID del que envia, obtenemos sus datos
 											{ 
 											$nick= consultar_datos_general( "USUARIOS", "ID='". $buf["SENDER"]. "'", "NICK");
 											$avatar= consultar_datos_general( "USUARIOS", "ID='". $_SESSION["chat_asesorid"]. "'", "AVATAR");
@@ -252,7 +256,7 @@ function chat_new_window()
 									limpiar($cons);
 									}
 								}
-							else
+							else # es una nueva conversacion y la sesion CHAT se creara cuando envie su primer mensaje
 								{
 								$nick= consultar_datos_general( "USUARIOS", "ID='". $_SESSION["chat_asesorid"]. "'", "NICK");
 								$avatar= consultar_datos_general( "USUARIOS", "ID='". $_SESSION["chat_asesorid"]. "'", "AVATAR");
@@ -296,10 +300,20 @@ function chat_new_window()
 
 					if( get_support( "ison" ) )
 						{
-						echo '<div class="input">
-						<input type="text" name="chat_msg" id="chat_msg" value="Escribe algo..." onclick="if(this.value==\'Escribe algo...\') this.value=\'\';" onblur="if( this.value==\'\') this.value=\'Escribe algo...\';" 
-						onkeyup="detectar_entradas( \'chat_msg\', event, \'chat_addmsg\', \''. currentURL(). '\', \'1\', \'1\' );">
+						# si es soporte, colocamos variable escondida para identificar la ventana de conversacion
+						if( is_soporte() )
+							$chatwin= $a;
+						else # es anonimo o cliente, colocamos vacio
+							$chatwin='0';
+						# tal vez sea inncesesario ya pensandolo bien, pero igual no estoy muy seguro si estaria de mas, lo pensare con mas trankilidad despues :D
+							
+						echo '
+						<input type="hidden" name="chatwin" id="chatwin" value="'. $a. '">
+						<div class="input">
+							<input type="text" name="chat_msg" id="chat_msg" value="Escribe algo..." onclick="if(this.value==\'Escribe algo...\') this.value=\'\';" onblur="if( this.value==\'\') this.value=\'Escribe algo...\';" 
+							onkeyup="detectar_entradas( \'chat_msg\', event, \'chat_addmsg\', \''. currentURL(). '\', \'1\', \'1\' );">
 						</div>';
+						unset($chatwin);
 						}
 				echo '</div>
 			</div>
