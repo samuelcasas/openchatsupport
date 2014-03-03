@@ -78,7 +78,7 @@ else
 			user: root, pass: free123<br>
 			user: soporte, pass: free123<br>
 			user: anon, pass: free123</p>
-			<p>Remember !<br>If you implement '. VERSION. ' in your CMS or Platform, please tell us, to help you in making of a plugin !</p>
+			<p>Remember !<br>If you implement '. VERSION. ' in your CMS or Platform, please tell us and we can assist you in a making of a custom-made plugin !</p>
 			<p>Contact me:<br>
 			Angel Cantu <<a href="mailto:angel.cantu@sie-group.net">angel.cantu@sie-group.net</a>></p>
 		</div>
