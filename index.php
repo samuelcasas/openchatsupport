@@ -61,10 +61,10 @@ if( !BASE_USR || !BASE_PASS || !SERVER || !BASE )
 	{
 	echo '
 	<div id="main">
-		To install '. VERSION. ' please made this:
+		To install '. VERSION. ' please do this:
 		<ul>
 			<li>mysql -u your_username -h your_hostname dababasename -p < mysql.db</li>
-			<li>Edit file <b>config.php</b> and set the vars.</li>
+			<li>Edit file <b>config.php</b> and set the variables to suit your needs.</li>
 		</ul>
 	</div>';
 	}
@@ -78,7 +78,7 @@ else
 			user: root, pass: free123<br>
 			user: soporte, pass: free123<br>
 			user: anon, pass: free123</p>
-			<p>Remember !<br>If you implement '. VERSION. ' in your CMS or Platform, please tell us, to help you in made a plugin !</p>
+			<p>Remember !<br>If you implement '. VERSION. ' in your CMS or Platform, please tell us, to help you in making of a plugin !</p>
 			<p>Contact me:<br>
 			Angel Cantu <<a href="mailto:angel.cantu@sie-group.net">angel.cantu@sie-group.net</a>></p>
 		</div>
@@ -113,8 +113,8 @@ else
 		* If not exists a SUPPORT User loged, the Window by Default is a contact form.<br>
 		* If exists a SUPPORT User loged, the Windows by Default is a conversation :D<br>
 		* The system make a random number to assign the chat window to a diferent Support User every time.<br>
-		* <b>problem</b> - how to close de session ?, how to know or detect when the user isn\'t in the website ?<br>
-		* <b>problem</b> - if you invoque the function <i>chat_new_window()</i> the system made a new chat window, but exist a CSS style error :\'( 
+		* <b>problem</b> - how to close the session ?, how to know or detect when the user isn\'t in the website ?<br>
+		* <b>problem</b> - if you invoke the function <i>chat_new_window()</i> the system makes a new chat window, but there exist a CSS style error :\'( 
 			because the first window is "upper" from the last... so wear !<br>
 		</div>
 	</div>
